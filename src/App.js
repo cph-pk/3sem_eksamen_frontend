@@ -5,6 +5,8 @@ import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import AllJokes from "./AllJokes";
 import AllScrape from "./AllScrape";
 import AdminCrud from "./AdminCRUD";
+import Frontpage from "./Frontpage";
+import MyBooks from "./MyBooks";
 import Login from "./Login";
 import { Switch, Route, NavLink, useHistory } from "react-router-dom";
 
@@ -12,18 +14,22 @@ const Header = ({ isLoggedIn, loginMsg, isAdmin, loginName }) => {
   return (
     <>
       <Navbar bg="dark" variant="dark" id="header">
-        <Navbar.Brand href="#home">Hold E, Gruppe 8</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <img
+            alt=""
+            src="/librarylogo.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
+          Book Library</Navbar.Brand>
         <Nav className="mr-auto">
           <NavLink className="nav-link" exact activeClassName="selected" href="/" to="/">
             Home
         </NavLink>
-          <NavLink className="nav-link" activeClassName="selected" to="/jokes">
-            Jokes
-        </NavLink>
-
           {isLoggedIn && (
-            <NavLink className="nav-link" activeClassName="selected" to="/scrape" href="/scrape">
-              Scrape
+            <NavLink className="nav-link" activeClassName="selected" to="/books" href="/books">
+              Books
             </NavLink>
           )}
           {isAdmin && (
@@ -90,6 +96,9 @@ export default function App() {
           <Route path="/scrape">
             <Scrape />
           </Route>
+          <Route path="/books">
+            <Books />
+          </Route>
           <Route path="/admin">
             <Admin />
           </Route>
@@ -113,7 +122,15 @@ export default function App() {
 function Home() {
   return (
     <div className="pageContent">
-      <h2>Home</h2>
+      <Frontpage />
+    </div>
+  );
+}
+
+function Books() {
+  return (
+    <div className="pageContent">
+      <MyBooks />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export const URL = "http://localhost:8080/3_sem_eksamensprojekt";
+/* export const URL = "http://localhost:8080/3_sem_eksamensprojekt";
 export const URLJokes = "http://localhost:8080/3_sem_eksamensprojekt/api/jokes";
 export const URLScrapeSequential = "http://localhost:8080/3_sem_eksamensprojekt/api/scrape/sequential";
 export const URLScrapeParallel = "http://localhost:8080/3_sem_eksamensprojekt/api/scrape/parallel";
@@ -6,4 +6,15 @@ export const AllUsers = "http://localhost:8080/3_sem_eksamensprojekt/api/info/pe
 export const DeleteUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info/delete/";
 export const UpdateUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info/person";
 export const GetUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info/person/";
-export const AddUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info";
+export const AddUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info"; */
+
+export const URL = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend";
+export const URLJokes = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/jokes";
+export const URLScrapeSequential = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/scrape/sequential";
+export const URLScrapeParallel = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/scrape/parallel";
+export const AllUsers = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info/person/all";
+export const DeleteUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info/delete/";
+export const UpdateUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info/person";
+export const GetUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info/person/";
+export const AddUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info";
+export const FetchBooks = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/book/all";

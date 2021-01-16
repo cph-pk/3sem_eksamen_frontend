@@ -5,13 +5,12 @@ import {
   Row,
   Col,
   Button,
-  InputGroup,
-  FormControl,
   Table,
   Form
 } from "react-bootstrap";
 
 function AdminCrud() {
+
   const initialValues = {
     email: "",
     password: "",
@@ -192,6 +191,8 @@ function AdminCrud() {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          &nbsp;
+          {/* <Button onClick={() => initialValues}>Cancel</Button> */}
         </Form>
         <p>{JSON.stringify(person)}</p>
       </div>

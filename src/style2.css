@@ -71,3 +71,7 @@ ul.header li span {
   padding: 14px 16px;
   text-decoration: none;
 }
+
+a, a:active, a:focus{
+  outline: none;
+}
