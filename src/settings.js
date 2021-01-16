@@ -18,3 +18,7 @@ export const UpdateUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/ap
 export const GetUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info/person/";
 export const AddUser = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/info";
 export const FetchBooks = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/book/all";
+export const GetBook = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/book/";
+export const AddBooks = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/book";
+export const UpdateBooks = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/book/update/";
+export const DeleteBooks = "https://cphper.dk/3sem_Eksamen_Boilerplate_Backend/api/book/delete/";

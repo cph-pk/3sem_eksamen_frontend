@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AllUsers, DeleteUser, UpdateUser, GetUser, AddUser } from "./settings";
+import { FetchBooks, AddBooks, GetBook, UpdateBooks, DeleteBooks } from "./settings";
 import {
   Container,
   Row,
@@ -12,50 +12,48 @@ import {
 function AdminCrud() {
 
   const initialValues = {
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    street: "",
-    city: "",
-    zipcode: ""
+    isbn: "",
+    title: "",
+    authors: "",
+    publisher: "",
+    publishYear: ""
   };
 
-  const [allPerson, setAllPerson] = useState([]);
-  const [person, setPerson] = useState(initialValues);
+  //const [allPerson, setAllPerson] = useState([]);
+  //const [person, setPerson] = useState(initialValues);
+  const [allBooks, setAllBooks] = useState([]);
+  const [book, setBook] = useState(initialValues);
 
   const handleSubmit = (event) => {
-    //   alert('A name was submitted: ' + person.firstName);
     event.preventDefault();
-    updateForm(person);
-    console.log("from submit " + person);
+    updateForm(book);
+    console.log("from submit " + book);
   };
 
   const handleChange = (event) => {
     const target = event.target;
     const id = target.id;
     const value = target.value;
-    setPerson({ ...person, [id]: value });
-    console.log("from change " + id);
+    setBook({ ...book, [id]: value });
+    console.log("from change: " + id);
   };
 
-  const fetchPerson = () => {
-    fetch(AllUsers)
+  const fetchAllBooks = () => {
+    fetch(FetchBooks)
       .then((res) => res.json())
       .then((data) => {
-        setAllPerson(data);
+        setAllBooks(data);
       });
   };
 
-  const deletePerson = (email) => {
+  const deleteBook = (id) => {
     const options = makeOptions("DELETE");
-
-    fetch(DeleteUser + email, options)
+console.log("Delete " + id)
+    fetch(DeleteBooks + id, options)
       .then((res) => res.json())
       .then((data) => {
-        setAllPerson(data);
-        fetchPerson();
+        setAllBooks(data);
+        fetchAllBooks();
       })
       .catch((err) => {
         if (err.status) {
@@ -66,11 +64,11 @@ function AdminCrud() {
       });
   };
 
-  const updateForm = (person) => {
-    const options = makeOptions("PUT", person);
+  const updateForm = (b) => {
+    const options = makeOptions("PUT", b);
 
-    fetch(UpdateUser, options)
-      .then((res) => fetchPerson())
+    fetch(UpdateBooks + b.id, options)
+      .then((res) => fetchAllBooks())
       .catch((err) => {
         if (err.status) {
           err.fullError.then((e) => console.log(e.detail));
@@ -80,11 +78,11 @@ function AdminCrud() {
       });
   };
 
-  const getPerson = (email) => {
-    fetch(GetUser + email)
+  const getBook = (id) => {
+    fetch(GetBook + id)
       .then((res) => res.json())
       .then((data) => {
-        setPerson(data);
+        setBook(data);
         console.log(data);
       })
       .catch((err) => {
@@ -97,11 +95,11 @@ function AdminCrud() {
   };
 
   const addPerson = () => {
-    const options = makeOptions("POST", person);
+    const options = makeOptions("POST", book);
 
-    fetch(AddUser, options)
+    fetch(AddBooks, options)
       .then((res) => res.json())
-      .then((res) => fetchPerson())
+      .then((res) => fetchAllBooks())
       .catch((err) => {
         if (err.status) {
           err.fullError.then((e) => console.log(e.detail));
@@ -115,86 +113,59 @@ function AdminCrud() {
     return (
       <div>
         <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
+          <Form.Group controlId="isbn">
+            <Form.Label>Isbn</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Email"
-              value={person.email}
+              placeholder="Isbn"
+              value={book.isbn}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+          <Form.Group controlId="title">
+            <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Password"
-              value={person.password}
-              onChange={handleChange}
-            />
-          </Form.Group>          
-          <Form.Group controlId="firstName">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="First name"
-              value={person.firstName}
+              placeholder="Title"
+              value={book.title}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="lastName">
-            <Form.Label>Last name</Form.Label>
+          <Form.Group controlId="authors">
+            <Form.Label>Authors</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Last name"
-              value={person.lastName}
+              placeholder="Authors"
+              value={book.authors}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="phone">
-            <Form.Label>Phone</Form.Label>
+          <Form.Group controlId="publisher">
+            <Form.Label>Publisher</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Phone"
-              value={person.phone}
+              placeholder="Publisher"
+              value={book.publisher}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="street">
-            <Form.Label>Street</Form.Label>
+          <Form.Group controlId="publishYear">
+            <Form.Label>Publish Year</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Street"
-              value={person.street}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="city">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="City"
-              value={person.city}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="zipcode">
-            <Form.Label>Zipcode</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Zipcode"
-              value={person.zipcode}
+              placeholder="Publish Year"
+              value={book.publishYear}
               onChange={handleChange}
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
+          <Button variant="info" size="sm" type="submit">
+            Update book
           </Button>
           &nbsp;
           {/* <Button onClick={() => initialValues}>Cancel</Button> */}
         </Form>
-        <p>{JSON.stringify(person)}</p>
+        <p>{JSON.stringify(book)}</p>
       </div>
     );
   };
@@ -224,49 +195,44 @@ function AdminCrud() {
   } */
 
   useEffect(() => {
-    fetchPerson();
+    fetchAllBooks();
   }, []);
 
   return (
     <div>
       <Container>
-        <h2>CRUD for users</h2>
+        <h1 className="display-4 text-center">CRUD for books</h1>
         <Row className="mt-4">
           <Col>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>First name</th>
-                  <th>Last name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Street</th>
-                  <th>City</th>
-                  <th>Zip</th>
-                  <th>Hobby</th>
-                  <th colSpan="2">&nbsp;</th>
-                </tr>
-              </thead>
+            <Table striped bordered hover size="sm">
+              
+                <thead>
+                  <tr>
+                    <th>Isbn</th>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Publisher</th>
+                    <th>Publisher year</th>
+                  </tr>
+                </thead>
+             
               <tbody>
-                {allPerson.all &&
-                  allPerson.all.map((element) => {
+                {allBooks.all &&
+                  allBooks.all.map((element) => {
                     return (
-                      <tr key={element.email}>
-                        <td>{element.firstName}</td>
-                        <td>{element.lastName}</td>
-                        <td>{element.email}</td>
-                        <td>{element.phone}</td>
-                        <td>{element.street}</td>
-                        <td>{element.city}</td>
-                        <td>{element.zipcode}</td>
-                        <td>{element.hobbyList.map((el) => el + ", ")}</td>
+                      <tr key={element.id}>
+                        <td>{element.isbn}</td>
+                        <td>{element.title}</td>
+                        <td>{element.authors}</td>
+                        <td>{element.publisher}</td>
+                        <td>{element.publishYear}</td>
                         <td>
-                          <Button onClick={() => getPerson(element.email)}>
+                          <Button variant="warning" size="sm" onClick={() => getBook(element.id)}>
                             Edit
                           </Button>
                         </td>
                         <td>
-                          <Button onClick={() => deletePerson(element.email)}>
+                          <Button variant="danger" size="sm" onClick={() => deleteBook(element.id)}>
                             Delete
                           </Button>
                         </td>
@@ -275,7 +241,7 @@ function AdminCrud() {
                   })}
               </tbody>
             </Table>
-            <Button onClick={() => addPerson()}>Add</Button>
+            <Button variant="info" size="sm" onClick={() => addPerson()}>Add book</Button>
           </Col>
         </Row>
 

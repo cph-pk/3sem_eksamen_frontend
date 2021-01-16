@@ -6,7 +6,8 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 const MyBooks = () => {
 
     const [allBooks, setAllBooks] = useState([]);
-
+    const [search, setSearch] = useState('');
+    const [filtered, setFiltered] = useState([]);
     const fetchBooks = () => {
         fetch(FetchBooks)
             .then((res) => res.json())
@@ -21,11 +22,51 @@ const MyBooks = () => {
         fetchBooks();
     }, []);
 
+    useEffect(() => {
+        if (allBooks.all !== undefined) {
+            setFiltered(
+                Object.values(allBooks.all).filter(book => {
+
+                    console.log("search " + book.title)
+                    return book.title.toLowerCase().includes(search.toLowerCase())
+
+                })
+            )
+        }
+    }, [search, allBooks])
+    /* 
+        const handleChange = (e) => {
+            e.preventDefault();
+            setSearch(e.target.value);
+        };
+    
+        if(search.length > 0) {
+            allBooks.all = Object.values(allBooks.all).filter((i) => {
+                console.log("i: " + i.title);
+                return i.title.toLowerCase().includes(search.toLowerCase());
+            });      
+        } */
+
+
     return (
         <div>
             <Container>
                 <h1 className="display-1 text-center">Books</h1>
                 <h1 className="display-4 text-center text-muted">List of all books</h1>
+                <Row>
+                    <Col>
+                        <div className="form-group">
+                            <label htmlFor="search">Search by book title her</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="search"
+                                placeholder="search"
+                                onChange={e => setSearch(e.target.value)}
+                                value={search} />
+                        </div>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
                         <Table striped bordered hover size="sm">
@@ -40,8 +81,8 @@ const MyBooks = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {allBooks.all &&
-                                    allBooks.all.map((element) => {
+                                {filtered &&
+                                    filtered.map((element) => {
                                         return (
                                             <tr key={element.id}>
                                                 <td>{element.id}</td>
