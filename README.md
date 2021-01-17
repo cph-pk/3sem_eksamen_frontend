@@ -1,12 +1,16 @@
-# CA3 quick start code: Frontend Boilerplate
-
-(Insert travis URL)
+# 3Sem Programming and teknik 2 (frontend)
 
 <br>
 
 # Introduction
 
 This is part of a 3'rd semester, computer science course at CPH Business, Lyngby.
+
+<br>
+
+# Description
+
+A fullstack application for a library system. This is a 24 hr programming eksammen for 3'rd semmester.
 
 <br>
 
@@ -81,6 +85,6 @@ In order to get started with the "Quick start code" you will need a [backend](ht
 
 - [Alexander Pihl](https://github.com/AlexanderPihl)
 - [Jean-Poul Leth-Møller](https://github.com/Jean-Poul)
-- Mick Larsen (Me)
+- [Mick Larsen](https://github.com/MivleDK)
 - [Morten Rasmussen]()
 - [Per Kringelbach](https://github.com/cph-pk)
