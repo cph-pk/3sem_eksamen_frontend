@@ -19,8 +19,6 @@ function AdminCrud() {
     publishYear: ""
   };
 
-  //const [allPerson, setAllPerson] = useState([]);
-  //const [person, setPerson] = useState(initialValues);
   const [allBooks, setAllBooks] = useState([]);
   const [book, setBook] = useState(initialValues);
 
@@ -48,7 +46,7 @@ function AdminCrud() {
 
   const deleteBook = (id) => {
     const options = makeOptions("DELETE");
-console.log("Delete " + id)
+    console.log("Delete " + id)
     fetch(DeleteBooks + id, options)
       .then((res) => res.json())
       .then((data) => {
@@ -69,6 +67,7 @@ console.log("Delete " + id)
 
     fetch(UpdateBooks + b.id, options)
       .then((res) => fetchAllBooks())
+      .then(reset => setBook(initialValues))
       .catch((err) => {
         if (err.status) {
           err.fullError.then((e) => console.log(e.detail));
@@ -100,6 +99,7 @@ console.log("Delete " + id)
     fetch(AddBooks, options)
       .then((res) => res.json())
       .then((res) => fetchAllBooks())
+      .then(reset => setBook(initialValues))
       .catch((err) => {
         if (err.status) {
           err.fullError.then((e) => console.log(e.detail));
@@ -163,9 +163,9 @@ console.log("Delete " + id)
             Update book
           </Button>
           &nbsp;
-          {/* <Button onClick={() => initialValues}>Cancel</Button> */}
+          <Button variant="secondary" size="sm" onClick={() => setBook(initialValues)}>Cancel</Button>
         </Form>
-        <p>{JSON.stringify(book)}</p>
+        {/* <p>{JSON.stringify(book)}</p> */}
       </div>
     );
   };
@@ -205,17 +205,17 @@ console.log("Delete " + id)
         <Row className="mt-4">
           <Col>
             <Table striped bordered hover size="sm">
-              
-                <thead>
-                  <tr>
-                    <th>Isbn</th>
-                    <th>Title</th>
-                    <th>Authors</th>
-                    <th>Publisher</th>
-                    <th>Publisher year</th>
-                  </tr>
-                </thead>
-             
+
+              <thead>
+                <tr>
+                  <th>Isbn</th>
+                  <th>Title</th>
+                  <th>Authors</th>
+                  <th>Publisher</th>
+                  <th>Publisher year</th>
+                </tr>
+              </thead>
+
               <tbody>
                 {allBooks.all &&
                   allBooks.all.map((element) => {
@@ -232,7 +232,13 @@ console.log("Delete " + id)
                           </Button>
                         </td>
                         <td>
-                          <Button variant="danger" size="sm" onClick={() => deleteBook(element.id)}>
+                          <Button variant="danger" size="sm" onClick={(e) => {
+                            e.stopPropagation();
+                            if (window.confirm('Are sure want to delete?')) {
+                              deleteBook(element.id)
+                            }
+                          }
+                          }>
                             Delete
                           </Button>
                         </td>
@@ -247,7 +253,7 @@ console.log("Delete " + id)
 
         {userForm()}
       </Container>
-    </div>
+    </div >
   );
 }
 

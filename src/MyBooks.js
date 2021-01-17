@@ -8,6 +8,7 @@ const MyBooks = () => {
     const [allBooks, setAllBooks] = useState([]);
     const [search, setSearch] = useState('');
     const [filtered, setFiltered] = useState([]);
+    
     const fetchBooks = () => {
         fetch(FetchBooks)
             .then((res) => res.json())
@@ -22,6 +23,7 @@ const MyBooks = () => {
         fetchBooks();
     }, []);
 
+
     useEffect(() => {
         if (allBooks.all !== undefined) {
             setFiltered(
@@ -34,20 +36,7 @@ const MyBooks = () => {
             )
         }
     }, [search, allBooks])
-    /* 
-        const handleChange = (e) => {
-            e.preventDefault();
-            setSearch(e.target.value);
-        };
-    
-        if(search.length > 0) {
-            allBooks.all = Object.values(allBooks.all).filter((i) => {
-                console.log("i: " + i.title);
-                return i.title.toLowerCase().includes(search.toLowerCase());
-            });      
-        } */
-
-
+ 
     return (
         <div>
             <Container>
