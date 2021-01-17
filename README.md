@@ -10,7 +10,7 @@ This is part of a 3'rd semester, computer science course at CPH Business, Lyngby
 
 # Description
 
-A fullstack application for a library system. This is a 24 hr programming eksammen for 3'rd semmester.
+A fullstack application for a library system. This is a 24 hr programming eksammen for 3'rd semester.
 
 <br>
 
